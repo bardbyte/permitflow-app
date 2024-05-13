@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Questionnaire {
+  id                   String             @id
+  state                String
+  permitType           String
+  version              Int                @default(1)
+  defaultRequirementId Int?
+  questions            Question[]
+  defaultRequirement   PermitRequirement? @relation(fields: [defaultRequirementId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Question {
+  id                          Int                           @id @default(autoincrement())
+  questionnaireId             String?
+  text                        String
+  questionType                String
+  order                       Int
+  dependencies                Json?
+  options                     Option[]
+  questionnaire               Questionnaire?                @relation(fields: [questionnaireId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  QuestionToPermitRequirement QuestionToPermitRequirement[]
+}
+
+model Option {
+  id                Int                @id @default(autoincrement())
+  questionId        Int?
+  value             String
+  requirementId     Int?
+  question          Question?          @relation(fields: [questionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  PermitRequirement PermitRequirement? @relation(fields: [requirementId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model PermitRequirement {
+  id                          Int                           @id @default(autoincrement())
+  name                        String
+  description                 String
+  Option                      Option[]
+  questionnaires              Questionnaire[]
+  QuestionToPermitRequirement QuestionToPermitRequirement[]
+}
+
+model QuestionToPermitRequirement {
+  A                 Int
+  B                 Int
+  Question          Question          @relation(fields: [A], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  PermitRequirement PermitRequirement @relation(fields: [B], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([A, B])
+  @@map("_QuestionToPermitRequirement")
+}

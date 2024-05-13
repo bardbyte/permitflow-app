@@ -1,0 +1,54 @@
+{
+    "california_residential": {
+      "state": "California",
+      "permitType": "Residential",
+      "version": 1,
+      "defaultRequirement": {
+        "id": 3,
+        "name": "No Permit",
+        "description": "Nothing is required! You are set to build."
+      },
+      "questions": [
+        {
+          "id": 1,
+          "text": "What residential work are you doing?",
+          "questionType": "single",
+          "order": 1,
+          "dependencies": {
+            "1": 2,
+            "2": 3
+          },
+          "options": [
+            { "id": 1, "value": "Interior work" },
+            { "id": 2, "value": "Exterior work" }
+          ]
+        },
+        {
+          "id": 2,
+          "text": "What interior work are you doing?",
+          "questionType": "multiple",
+          "order": 2,
+          "options": [
+            { "id": 3, "value": "Bathroom remodel", "requirementId": 2 },
+            { "id": 4, "value": "New bathroom", "requirementId": 1 },
+            { "id": 5, "value": "New laundry room", "requirementId": 1 },
+            { "id": 6, "value": "Other", "requirementId": 1 }
+          ]
+        },
+        {
+          "id": 3,
+          "text": "What exterior work are you doing?",
+          "questionType": "multiple",
+          "order": 3,
+          "options": [
+            { "id": 7, "value": "Garage door replacement", "requirementId": 2 },
+            { "id": 8, "value": "Exterior doors", "requirementId": 2 },
+            { "id": 9, "value": "Fencing", "requirementId": 3 },
+            { "id": 10, "value": "Other", "requirementId": 1 }
+          ]
+        }
+      ]
+    }
+  }
+  
+  

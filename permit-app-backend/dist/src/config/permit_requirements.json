@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "In-House Review Process",
+        "description": "A building permit is required. Include plan sets. Submit application for in-house review."
+    },
+    {
+        "id": 2,
+        "name": "Over-the-Counter Submission Process",
+        "description": "A building permit is required. Submit application for OTC review."
+    },
+    {
+        "id": 3,
+        "name": "No Permit",
+        "description": "Nothing is required! You are set to build."
+    }
+]
